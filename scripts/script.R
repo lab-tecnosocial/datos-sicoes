@@ -21,7 +21,7 @@ write_csv(data, "todo/todo.csv")
   
 # filtrar convocatorias de salud
 data <- read_csv("todo/todo.csv")
-objetos_1 <- "covid|coronavirus|bioseguridad|cuarentena|barbijos|oxigeno|alcohol|gel|pandemia|barbijo|respiradores|sanitizador|respirador|vacunas"
+objetos_1 <- "covid|coronavirus|bioseguridad|cuarentena|oxigeno|alcohol|gel|pandemia|barbijo|respirador|sanitizador|vacuna|dioxido|ivermectina|pruebas covid|antigeno|PCR"
 objetos_2 <- "salud|hospital|medicamentos|medico|médico|medicos|médicos|laboratorio|farmacia|enfermeria|pacientes|reactivos|farmaceuticos|clinico|insumos médicos|desinfectante|medicinal|enfermería"
 
 kw <- str_c(objetos_1, objetos_2, sep = "|")
@@ -36,3 +36,16 @@ salud_contratado <- salud %>%
 salud_contratado %>%
   filter(ficha_proceso == "Ver Ficha") %>%
   nrow() -> fichas_hay
+
+# Dividir salud
+
+salud <- read_csv("temas/salud_contratado.csv")
+
+identify_kw <- function(df, kw){
+  df %>% filter(str_detect(objeto, regex(kw, ignore_case = T)))
+}
+vector_kw <- str_split(objetos_1, fixed("|")) %>% unlist()
+
+list_salud <- map(vector_kw, ~identify_kw(salud, .x)) %>% set_names(vector_kw)
+
+walk2(list_salud, vector_kw, ~write_csv(.x, paste0("temas/", .y, ".csv")))
