@@ -25,8 +25,8 @@ new_data <- archivos[-1] %>%
 
 old_data <- read_csv(archivos[1], col_types = "cccccccDDccccccccDcc")
 
-data <- bind_rows(data, old_data) %>%
-  arrange(fecha_presentacion)
+data <- bind_rows(old_data, new_data) %>%
+  arrange(fecha_publicacion)
 
 write_csv(data, "todo/todo.csv")
 
