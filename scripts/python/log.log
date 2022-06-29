@@ -1,0 +1,20 @@
+2022-06-29 10:01:02,669 ERROR tabula.io Error from tabula-java:
+Error: Error: End-of-File, expected line
+
+
+2022-06-29 10:01:02,670 ERROR __main__ Error al extraer tabla de fichas/Fichas_Javi/Fichas_Covid/21-0417-06-1119376-1-1.pdf
+2022-06-29 10:01:02,670 ERROR __main__ Command '['java', '-Djava.awt.headless=true', '-Dfile.encoding=UTF8', '-jar', '/usr/local/lib/python3.9/site-packages/tabula/tabula-1.0.5-jar-with-dependencies.jar', '--pages', '2', '--lattice', '--format', 'JSON', 'fichas/Fichas_Javi/Fichas_Covid/21-0417-06-1119376-1-1.pdf']' returned non-zero exit status 1.
+2022-06-29 10:11:23,582 ERROR __main__ Error al extraer tabla de fichas/Fichas_Abi/covid_restantes/20-1205-00-1094142-1-1.pdf
+2022-06-29 10:11:23,583 ERROR __main__ fichas/Fichas_Abi/covid_restantes/20-1205-00-1094142-1-1.pdf is empty. Check the file, or download it manually.
+2022-06-29 10:28:20,917 ERROR __main__ Error al extraer tabla 20-0138-00-1056840-1-1
+2022-06-29 10:28:20,917 ERROR __main__ list index out of range
+2022-06-29 10:28:25,215 ERROR __main__ Error al extraer tabla 20-1532-00-1100846-1-1
+2022-06-29 10:28:25,216 ERROR __main__ list index out of range
+2022-06-29 10:28:26,411 ERROR __main__ Error al extraer tabla 21-0904-00-1134138-1-1
+2022-06-29 10:28:26,412 ERROR __main__ list index out of range
+2022-06-29 10:28:26,462 ERROR __main__ Error al extraer tabla 21-1605-00-1157866-1-1
+2022-06-29 10:28:26,462 ERROR __main__ list index out of range
+2022-06-29 10:28:26,468 ERROR __main__ Error al extraer tabla 21-0145-00-1121930-1-1
+2022-06-29 10:28:26,468 ERROR __main__ index -1 is out of bounds for axis 0 with size 0
+2022-06-29 10:28:26,692 ERROR __main__ Error al extraer tabla 21-1714-00-1140066-1-1
+2022-06-29 10:28:26,692 ERROR __main__ list index out of range
