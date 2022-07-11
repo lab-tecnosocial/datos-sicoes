@@ -34,7 +34,7 @@ filtrar_contratos <- function(data, objetos, guardar = F){
 
 ## uso de funcion
   
-objetos_covid <- "covid|coronavirus|bioseguridad|cuarentena|oxigeno|alcohol|gel|pandemia|barbijo|respirador|sanitizador|vacuna|dioxido de cloro|ivermectina|pruebas covid|antigeno|PCR|congelador|plasma"
+objetos_covid <- "covid|coronavirus|cuarentena|oxigeno|alcohol|gel|pandemia|barbijo|respirador|sanitizador|vacuna|dioxido de cloro|ivermectina|pruebas covid|antigeno|PCR|congelador|plasma"
 
 lista <- filtrar_contratos(
   "temas/salud_contratado.csv", 

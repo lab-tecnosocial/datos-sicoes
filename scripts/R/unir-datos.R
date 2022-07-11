@@ -12,3 +12,12 @@ fichas_todo <- bind_rows(fichas_antiguas, fichas_nuevas)
 write_csv(fichas_todo, "fichas/fichas_todo.csv")
 
 # Unir datos con fichas
+lista_temas <- readRDS("temas/lista_temas.Rds")
+fichas_todo <- read_csv("fichas/fichas_todo.csv")
+
+lista_temas_fichas <- lista_temas %>%
+  map(
+    ~left_join(.x, fichas_todo, by = "cuce")
+  )
+
+walk2(lista_temas_fichas, names(lista_temas_fichas), ~write_csv(.x, paste0("temas/", .y, ".csv")))
