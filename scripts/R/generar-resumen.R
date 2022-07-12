@@ -1,4 +1,5 @@
 library(tidyverse)
+library(kableExtra)
 
 # contar datos que existen
 lista_temas_fichas <- readRDS("temas/lista_temas_fichas.Rds")
@@ -38,32 +39,36 @@ links_datos <- c(
 )
 
 links_fichas <- c(
-  "alcohol" = "",
-  "antigeno" = "",
-  "barbijo" = "",
-  "congelador" = "",
-  "coronavirus" = "",
-  "covid" = "",
-  "cuarentena" = "",
-  "dioxido de cloro" = "",
-  "gel" = "",
-  "ivermectina" = "",
-  "oxigeno" = "",
-  "pandemia" = "",
-  "PCR" = "",
-  "plasma" = "",
-  "pruebas covid" = "",
-  "respirador" = "",
-  "sanitizador" = "",
-  "vacuna" = ""
+  "alcohol" = "https://drive.google.com/drive/folders/1Wr_wafNf7fzEoZNVZDbL_NW8zfxI7nvI?usp=sharing",
+  "antigeno" = "https://drive.google.com/drive/folders/1LXwZ3LrOkKK1GseiYkUz93tPQBy19_Hw?usp=sharing",
+  "barbijo" = "https://drive.google.com/drive/folders/1jim5vKXkuaijUqICU7z33_MOcS_0FvhJ?usp=sharing",
+  "congelador" = "https://drive.google.com/drive/folders/1pI41Ad_MU0uiswLK1bsQVAh8-coAVwCy?usp=sharing",
+  "coronavirus" = "https://drive.google.com/drive/folders/1_7s5NNNSp3pbG1EwdMR7LA-CjlTkzjYD?usp=sharing",
+  "covid" = "https://drive.google.com/drive/folders/1mI4ncZ9Wp6KHocpxAnFnfglJpf2m9se1?usp=sharing",
+  "cuarentena" = "https://drive.google.com/drive/folders/1rb8-H2pNgOvYa5dJOFJ9m56FqrYkCFIZ?usp=sharing",
+  "dioxido de cloro" = "https://drive.google.com/drive/folders/1Y2P3Ep39S6q1IDfa1du3mQPgQ2TgZnL2?usp=sharing",
+  "gel" = "https://drive.google.com/drive/folders/1YMga6f7XWMZDCiT-YdeDbfsu2OfsfFIo?usp=sharing",
+  "ivermectina" = "https://drive.google.com/drive/folders/1kxLIKHj_Sa765WsuQ88qHSmooD188UCD?usp=sharing",
+  "oxigeno" = "https://drive.google.com/drive/folders/1l9cn8voGE_ZatlgsUHCEQbYwPzlBy5N0?usp=sharing",
+  "pandemia" = "https://drive.google.com/drive/folders/1IZa15HPPtwsJOHt7VXnJ0vw4zysK2cBW?usp=sharing",
+  "PCR" = "https://drive.google.com/drive/folders/1goXSePiY3zq4Nbw7y-P8OPUvytZ67Anp?usp=sharing",
+  "plasma" = "https://drive.google.com/drive/folders/1TFHa5ycXFFcmHc3xPvmTSnNU_EpKf-mI?usp=sharing",
+  "pruebas covid" = "https://drive.google.com/drive/folders/1vwGHA9cOWc58b5TKq5Z96l2TjLc_JTpn?usp=sharing",
+  "respirador" = "https://drive.google.com/drive/folders/1N1vYqImz-cRtZiLS8lHdX_vp0vRKA3gM?usp=sharing",
+  "sanitizador" = "https://drive.google.com/drive/folders/19GWAbDxJh2i-dq1D4rAVZxIIZwlnH_u0?usp=sharing",
+  "vacuna" = "https://drive.google.com/drive/folders/1GavIvVJUukSbepbNwyIA2gHwEDXnyCsV?usp=sharing"
+
 )
 
 # generar tablas
 
 conteo_temas <- conteo_temas %>%
-  mutate(enlace = text_spec("Descarga", link = paste0(link_root, tema, ".csv")))
+  mutate(
+    datos = text_spec("Ver", link = links_datos),
+    fichas = text_spec("Ver", link = links_fichas)
+    )
 
 conteo_temas %>%
-  kbl() %>%
+  kbl(escape = F) %>%
   kable_material("hover") %>%
-  save_kable("temas/tabla_resumen.html", self_contained = F)
+  save_kable("temas/tabla_resumen.html", bs_theme = "paper", self_contained = F)
