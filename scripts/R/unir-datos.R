@@ -1,5 +1,6 @@
 library(tidyverse)
 library(stringi)
+library(kableExtra)
 
 # Unir fichas
 fichas_antiguas <- read_csv("fichas/fichas_antiguas.csv", col_types = "cdccccdddcdddddcc")
@@ -23,12 +24,3 @@ saveRDS(lista_temas_fichas, "temas/lista_temas_fichas.Rds")
 
 walk2(lista_temas_fichas, names(lista_temas_fichas), ~write_csv(.x, paste0("temas/", .y, ".csv"), na = ""))
 
-# contar datos que existen
-lista_temas_fichas <- readRDS("temas/lista_temas_fichas.Rds")
-df_temas_fichas <- bind_rows(lista_temas_fichas, .id = "tema") %>%
-  arrange(fecha_publicacion)
-
-n_distinct(df_temas_fichas$cuce)
-
-df_temas_fichas %>%
-  count(tema, sort = T)
