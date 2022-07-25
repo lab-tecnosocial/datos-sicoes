@@ -60,6 +60,11 @@ export_csv_json(adjudicados)
 
 # Joins conv y fichas
 
+# Totales convocatorias
+totales_conv <- read_csv("scripts/python/out/v2/tablas_totales.csv") %>%
+  filter(cuce %in% conv_cuces$cuce) %>%
+  distinct(cuce, .keep_all = T)
+export_csv_json(totales_conv)
 
 ## Graficos -------
 library(lubridate)
