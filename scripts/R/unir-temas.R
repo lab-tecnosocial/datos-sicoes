@@ -60,3 +60,24 @@ export_csv_json(adjudicados)
 
 # Joins conv y fichas
 
+
+## Graficos -------
+library(lubridate)
+
+conv_cuces <- read_csv("todo/covid/conv_cuces.csv")
+
+serie_tiempo <- conv_cuces %>%
+  group_by(fecha = floor_date(fecha_publicacion, "month")) %>%
+  summarize(n_conv = n()) %>%
+  mutate(mes = paste0(month(fecha), "-", year(fecha)), .after = fecha)
+
+export_csv_json(serie_tiempo)
+
+ggplot(serie_tiempo) +
+  geom_line(aes(x = fecha, y = n_conv))
+
+conv_temas <- read_csv("todo/covid/conv_temas.csv")
+frec_temas <- conv_temas %>%
+  count(tema)
+
+export_csv_json(frec_temas)
