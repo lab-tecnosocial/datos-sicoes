@@ -1,74 +1,74 @@
 [
   {
-    "tema": "alcohol",
-    "n": 220
-  },
-  {
-    "tema": "antigeno",
-    "n": 39
-  },
-  {
-    "tema": "barbijo",
-    "n": 374
-  },
-  {
-    "tema": "congelador",
-    "n": 18
+    "tema": "covid",
+    "n": 2160
   },
   {
     "tema": "coronavirus",
     "n": 1057
   },
   {
-    "tema": "covid",
-    "n": 2160
-  },
-  {
-    "tema": "cuarentena",
-    "n": 60
-  },
-  {
-    "tema": "dioxido de cloro",
-    "n": 1
-  },
-  {
-    "tema": "gel",
-    "n": 128
-  },
-  {
-    "tema": "ivermectina",
-    "n": 16
+    "tema": "barbijo",
+    "n": 374
   },
   {
     "tema": "oxigeno",
     "n": 298
   },
   {
+    "tema": "alcohol",
+    "n": 220
+  },
+  {
+    "tema": "gel",
+    "n": 128
+  },
+  {
     "tema": "pandemia",
     "n": 120
+  },
+  {
+    "tema": "vacuna",
+    "n": 68
+  },
+  {
+    "tema": "cuarentena",
+    "n": 60
   },
   {
     "tema": "PCR",
     "n": 51
   },
   {
-    "tema": "plasma",
-    "n": 28
-  },
-  {
-    "tema": "pruebas covid",
-    "n": 9
-  },
-  {
     "tema": "respirador",
     "n": 49
+  },
+  {
+    "tema": "antigeno",
+    "n": 39
+  },
+  {
+    "tema": "plasma",
+    "n": 28
   },
   {
     "tema": "sanitizador",
     "n": 20
   },
   {
-    "tema": "vacuna",
-    "n": 68
+    "tema": "congelador",
+    "n": 18
+  },
+  {
+    "tema": "ivermectina",
+    "n": 16
+  },
+  {
+    "tema": "pruebas covid",
+    "n": 9
+  },
+  {
+    "tema": "dioxido de cloro",
+    "n": 1
   }
 ]

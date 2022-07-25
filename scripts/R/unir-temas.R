@@ -78,6 +78,6 @@ ggplot(serie_tiempo) +
 
 conv_temas <- read_csv("todo/covid/conv_temas.csv")
 frec_temas <- conv_temas %>%
-  count(tema)
+  count(tema, sort = T)
 
 export_csv_json(frec_temas)
