@@ -1,5 +1,6 @@
 library(tidyverse)
 library(lubridate)
+
 # igualar nombres de columnas
 data_ajena <- read_csv("data/conv/03_07-2020.csv")
 data_propia <- read_csv("data/conv/01-2021.csv")

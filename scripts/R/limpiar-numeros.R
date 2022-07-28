@@ -1,12 +1,8 @@
 library(tidyverse)
-library(jsonlite)
-totales <- read_csv("todo/covid/tablas_totales.csv")
+source("scripts/R/mis-funciones.R")
 
-parsear_numero_diverso <- function(n) {
-  punto_decimal <- ".*,.*\\..*"
-  coma_decimal <- ".*\\..*,.*"
-  if_else(str_detect(n, punto_decimal), parse_number(n), parse_number(n, locale = locale(decimal_mark = ",", grouping_mark = ".")))
-}
+# Tabla de totales
+totales <- read_csv("todo/covid/tablas_totales.csv")
 
 totales_clean <- totales %>%
   mutate(
@@ -17,7 +13,7 @@ totales_clean <- totales %>%
 
 export_csv_json(totales_clean)
 
-
+# Tabla de adjudicados
 adjudicados <- read_csv("todo/covid/adjudicados.csv", col_types = "cccccccc")
 
 adjudicados <- adjudicados %>%

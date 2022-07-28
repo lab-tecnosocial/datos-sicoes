@@ -1,5 +1,6 @@
 library(tidyverse)
 library(jsonlite)
+source("scripts/R/mis-funciones.R")
 
 # Cargar archivos y contar
 archivos <- list.files("temas/datos-drive/", full.names = T) %>%
@@ -13,14 +14,6 @@ pdfs <- list.files("scripts/python/fichas_simp/", recursive = T) %>%
 df_temas <- map_dfr(archivos, read_csv, .id = "tema") %>%
   arrange(fecha_publicacion) %>%
   relocate(tema)
-
-# Funcion para exportar a CSV y JSON
-
-export_csv_json <- function(df, path = "todo/covid/") {
-  name_df <- deparse(substitute(df))
-  write_csv(df, paste0(path, name_df, ".csv" ), na = "")
-  write(toJSON(df, pretty = T), paste0(path, name_df, ".json"))
-}
 
 # Exportar cuces unicos (3632)
 conv_cuces <- df_temas %>% distinct(cuce, .keep_all = T) %>%
@@ -75,7 +68,6 @@ serie_tiempo <- conv_cuces %>%
   group_by(fecha = floor_date(fecha_publicacion, "month")) %>%
   summarize(n_conv = n()) %>%
   mutate(mes = paste0(month(fecha), "-", year(fecha)), .after = fecha)
-
 export_csv_json(serie_tiempo)
 
 ggplot(serie_tiempo) +
