@@ -16,11 +16,12 @@ export_csv_json(totales_clean)
 # Tabla de adjudicados
 adjudicados <- read_csv("todo/covid/adjudicados.csv", col_types = "cccccccc")
 
-adjudicados <- adjudicados %>%
+adjudicados_clean <- adjudicados %>%
   mutate(
     monto_adjudicado = parsear_numero_diverso(monto_adjudicado),
     monto_de = parsear_numero_diverso(monto_de),
     monto = parsear_numero_diverso(monto)
   )
 
-export_csv_json(adjudicados)
+export_csv_json(adjudicados_clean)
+

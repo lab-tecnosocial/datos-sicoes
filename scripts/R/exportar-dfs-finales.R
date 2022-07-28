@@ -45,7 +45,7 @@ fichas <- fichas_todo %>%
 export_csv_json(fichas)
 
 # Exportar adjudicados
-adjudicados_todo <- read_csv("scripts/python/out/v1/tablas_adjudicado.csv")
+adjudicados_todo <- read_csv("scripts/python/out/v1/tablas_adjudicado.csv", col_types = "cccccccc")
 adjudicados <- adjudicados_todo %>%
   filter(cuce %in% conv_cuces$cuce) %>%
   select(-list_n)

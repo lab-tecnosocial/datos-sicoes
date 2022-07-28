@@ -1,3 +1,5 @@
+library(tidyverse)
+
 # Exportar a CSV y JSON
 export_csv_json <- function(df, path = "todo/covid/") {
   name_df <- deparse(substitute(df))
