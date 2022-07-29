@@ -2,7 +2,7 @@ library(tidyverse)
 source("scripts/R/mis-funciones.R")
 
 # Tabla de totales
-totales <- read_csv("todo/covid/tablas_totales.csv")
+totales <- read_csv("todo/covid/totales_conv.csv", col_types = "ccccccc")
 
 totales_clean <- totales %>%
   mutate(
