@@ -3,6 +3,9 @@
 .Rhistory
 scripts/python/fichas/
 scripts/python/fichas_simp/
+scripts/python/miss_fichas_totales/
+scripts/python/miss_fichas_adjudicados/
+scripts/python/miss_fichas_items/
 scripts/python/fichas_simp_unique/
 scripts/python/todo_fichas/
 scripts/python/filtro_fichas/

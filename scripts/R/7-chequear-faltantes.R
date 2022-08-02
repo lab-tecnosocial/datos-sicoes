@@ -45,7 +45,7 @@ quantile(pdfs_pag$paginas_ficha, probs = seq(.05, .95, .05))
 convocatorias <- convocatorias %>%
   left_join(pdfs_pag)
 
-## analisis de fichas faltantes
+## analisis de items faltantes
 contar_faltante_pag <- function(df, pag, col){
   df %>%
     filter(paginas_ficha == pag) %>%
@@ -61,19 +61,45 @@ convocatorias %>%
   geom_bar(aes(x = paginas_ficha, fill = falta_total))
 
 convocatorias <- convocatorias %>%
-  mutate(falta_fichas = if_else(paginas_ficha >= 4, "Prob. Si", "Prob. No"))
+  mutate(falta_items = if_else(paginas_ficha >= 4, "Prob. Si", "Prob. No"))
 
-convocatorias %>% count(falta_fichas)
+convocatorias %>% count(falta_items)
 
-export_csv_json(convocatorias)
+conv_cuces_info <- convocatorias
+
+export_csv_json(conv_cuces_info)
 
 # Tabla de resumen de faltantes
 faltantes <- convocatorias %>%
   summarize(
     falta_total = sum(falta_total == "Si"),
     falta_adjudicado = sum(falta_adjudicado == "Si"),
-    prob_falta_fichas = sum(falta_fichas == "Prob. Si")
+    prob_falta_items = sum(falta_items == "Prob. Si")
     ) %>%
   pivot_longer(everything(), names_to = "tipo", values_to = "perdido")
 
 write_csv(faltantes, "scripts/R/faltantes.csv")
+
+# Identificar y mover fichas
+
+dir_origen <- "scripts/python/fichas_simp_unique/"
+dir_miss_totales <- "scripts/python/miss_fichas_totales//"
+dir_miss_adjudicados <- "scripts/python/miss_fichas_adjudicados/"
+dir_miss_items <- "scripts/python/miss_fichas_items/"
+
+conv_info <- read_csv("todo/covid/conv_cuces_info.csv")
+
+fix_totales <- conv_info %>%
+  filter(falta_total == "Si")
+
+fix_adjudicados <- conv_info %>%
+  filter(falta_adjudicado == "Si")
+
+fix_items <- conv_info %>%
+  filter(falta_items == "Prob. Si")
+
+walk(fix_totales$cuce, ~file.copy(str_c(dir_origen, .x, ".pdf"), str_c(dir_miss_totales, .x, ".pdf")))
+
+walk(fix_adjudicados$cuce, ~file.copy(str_c(dir_origen, .x, ".pdf"), str_c(dir_miss_adjudicados, .x, ".pdf")))
+
+walk(fix_items$cuce, ~file.copy(str_c(dir_origen, .x, ".pdf"), str_c(dir_miss_items, .x, ".pdf")))
