@@ -1,4 +1,5 @@
 library(tidyverse)
+source("scripts/R/mis-funciones.R")
 
 # Convocatorias vs montos totales 
 convocatorias <- read_csv("todo/covid/conv_cuces.csv")
@@ -42,11 +43,9 @@ pdfs_pag %>%
 quantile(pdfs_pag$paginas_ficha, probs = seq(.05, .95, .05))
 
 convocatorias <- convocatorias %>%
-  left_join(pdfs_pag) %>%
-  mutate(cuce2 = cuce)
+  left_join(pdfs_pag)
 
-## analisis de faltantes
-
+## analisis de fichas faltantes
 contar_faltante_pag <- function(df, pag, col){
   df %>%
     filter(paginas_ficha == pag) %>%
@@ -59,16 +58,22 @@ list_conteo <- map2(combina_datos$pags, combina_datos$cats, ~contar_faltante_pag
 
 convocatorias %>%
   ggplot() +
-  geom_bar(aes(x = paginas_ficha, fill = falta_adjudicado))
+  geom_bar(aes(x = paginas_ficha, fill = falta_total))
 
 convocatorias <- convocatorias %>%
   mutate(falta_fichas = if_else(paginas_ficha >= 4, "Prob. Si", "Prob. No"))
 
 convocatorias %>% count(falta_fichas)
 
-write_csv(convocatorias, "scripts/R/miss.csv")
+export_csv_json(convocatorias)
 
 # Tabla de resumen de faltantes
+faltantes <- convocatorias %>%
+  summarize(
+    falta_total = sum(falta_total == "Si"),
+    falta_adjudicado = sum(falta_adjudicado == "Si"),
+    prob_falta_fichas = sum(falta_fichas == "Prob. Si")
+    ) %>%
+  pivot_longer(everything(), names_to = "tipo", values_to = "perdido")
 
-n_distinct(convocatorias$cuce)
-n_distinct(totales$cuce)
+write_csv(faltantes, "scripts/R/faltantes.csv")
