@@ -45,7 +45,9 @@ adjudicados_clean <- adjudicados %>%
   mutate(
     monto_adjudicado = parsear_numero_diverso(monto_adjudicado),
     monto_de = parsear_numero_diverso(monto_de),
-    monto = parsear_numero_diverso(monto)
+    monto = parsear_numero_diverso(monto),
+    fecha_1 = parse_date(fecha_1, "%d/%m/%Y"),
+    fecha_2 = parse_date(fecha_2, "%d/%m/%Y")
   ) %>%
   select(-list_n)
 
