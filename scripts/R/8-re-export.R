@@ -25,10 +25,21 @@ totales_clean <- totales %>%
   ) %>%
   select(-list_n)
 
-export_csv_json(totales_clean)
+total_1 <- select(totales_clean, cuce, tipo = tipo_a, monto = monto_a)
+total_2 <- select(totales_clean, cuce, tipo = tipo_b, monto = monto_b)
+total_3 <- select(totales_clean, cuce, tipo = tipo_c, monto = monto_c)
+
+totales_longer <- bind_rows(total_1, total_2, total_3) %>%
+  arrange(cuce) %>%
+  na.omit()
+
+totales_wider <- totales_longer %>%
+  pivot_wider(names_from = tipo, values_from = monto, values_fn = sum)
+
+export_csv_json(totales_wider)
 
 # Adjudicados
-adjudicados <- read_csv("scripts/python/out/v2/tablas_clean_adjudicado.csv", col_types = "cccccccccccc")
+adjudicados <- read_csv("scripts/python/out/v2/tablas_adjudicado_clean.csv", col_types = "cccccccccccc")
 
 adjudicados_clean <- adjudicados %>%
   mutate(
@@ -42,7 +53,7 @@ export_csv_json(adjudicados_clean)
 
 
 # Items
-items <- read_csv("scripts/python/out/v2/tablas_clean_item.csv", col_types = "cccccccccccccccccc")
+items <- read_csv("scripts/python/out/v2/tablas_item_clean.csv", col_types = "cccccccccccccccccc")
 
 items_clean <- items %>%
   mutate(
