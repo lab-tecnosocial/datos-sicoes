@@ -34,7 +34,8 @@ totales_longer <- bind_rows(total_1, total_2, total_3) %>%
   na.omit()
 
 totales_wider <- totales_longer %>%
-  pivot_wider(names_from = tipo, values_from = monto, values_fn = sum)
+  pivot_wider(names_from = tipo, values_from = monto, values_fn = sum) %>%
+  set_names("cuces", "total_adjudicado", "total_recepcionado", "total_referencial")
 
 export_csv_json(totales_wider)
 
