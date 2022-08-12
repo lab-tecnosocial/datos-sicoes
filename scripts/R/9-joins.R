@@ -32,3 +32,5 @@ items_conv <- items %>%
 
 export_csv_json(items_conv)
 
+# Adjudicados
+export_csv_json(adjudicados)
